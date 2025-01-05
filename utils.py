@@ -142,7 +142,8 @@ def trigger_ethereum_nft(uri, owner_address):
 
     print(f"Transazione inviata su Ethereum: {web3.to_hex(tx_hash)}")
     receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
-    print(f"Transazione confermata: {receipt}")
+    print("Transazione confermata")
+    # print(f"Transazione confermata: {receipt}")
     return receipt
 
 # definizione funzione per la verifica della corretta creazione di un NFT
@@ -218,7 +219,7 @@ def create_and_transfer_nft(seed_company, product_uri, avatar_uri, taxon, seed_r
         print("Attivazione del contratto Ethereum...")
         account_address = "0x0CbB29c4659DB51384fA809e0a7b7147c315DC4c" # indirizzo Metamask
         receipt = trigger_ethereum_nft(avatar_uri, account_address)
-        print(f"Dati receipt: {receipt}")
+        # print(f"Dati receipt: {receipt}")
         print("NFT dinamico creato su Ethereum.")
         
         # Recupera il token_id dai log
