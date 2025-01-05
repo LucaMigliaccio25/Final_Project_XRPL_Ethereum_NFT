@@ -1,5 +1,15 @@
 import streamlit as st
 
+# Dati XRPL
+seed_company = "sEd7uhRLEHf7sELoTUiKTcDwgn3zvdA"
+seed_receiver = "sEd7vJWGo5cYxju2raWQ1yQSFPgVejN"
+product_uri = "https://diadenn.vercel.app/product/mike-wind-1"
+taxon = 0
+
+# Percorsi immagini locali (avatar/digital twin)
+initial_image_path = "data/images/stregone.png"  # Immagine per la creazione
+updated_image_path = "data/images/stregone_update.png"  # Immagine per l'aggiornamento
+
 # Configurazione iniziale dell'interfaccia
 st.set_page_config(page_title="Creazione NFT Dinamico", layout="centered")
 
