@@ -1,6 +1,6 @@
 import streamlit as st
 import json
-from utils import create_and_transfer_nft
+from utils import create_and_transfer_nft, update_nft_metadata
 
 # Dati XRPL
 seed_company = "sEd7uhRLEHf7sELoTUiKTcDwgn3zvdA"
@@ -48,3 +48,25 @@ with col1:
             st.image(initial_image_path, caption="Immagine Avatar Creato", use_container_width=True)
         except Exception as e:
             st.error(f"Errore durante la creazione dell'NFT: {e}")
+
+# Sezione: Aggiornamento Metadata
+with col2:
+    st.header("Aggiorna Avatar")
+    if st.button("Aggiorna Metadata"):
+        try:
+            # Carica il token ID dal file JSON
+            with open("token_data.json", "r") as f:
+                token_data = json.load(f)
+                token_id = token_data["token_id"]
+
+            st.write("Aggiornamento dei metadati in corso...")
+            # Aggiorna metadati
+            update_receipt = update_nft_metadata(token_id, updated_metadata)
+
+            # Mostra dettagli aggiornati
+            st.success(f"Metadati aggiornati con successo per Token ID: {token_id}")
+            st.write("Receipt:")
+            st.json(update_receipt)
+            st.image(updated_image_path, caption="Immagine Avatar Aggiornata", use_container_width=True)
+        except Exception as e:
+            st.error(f"Errore durante l'aggiornamento dei metadati: {e}")
