@@ -234,3 +234,37 @@ def create_and_transfer_nft(seed_company, product_uri, avatar_uri, taxon, seed_r
         return wallet_receiver, NFT_token_id, token_id, token_uri
     except Exception as e:
         raise Exception(f'Didn\'t work: {e}')
+
+# definizione funzione per aggiornare i metadati del digital twin (avatar) associato all'NFT creato
+def update_nft_metadata(token_id, new_uri):
+    """
+    Aggiorna i metadati di un NFT esistente.
+    """
+    try:
+        account = web3.eth.account.from_key(private_key)
+        nonce = web3.eth.get_transaction_count(account.address)
+
+        # Ottieni il gas price corrente e aumentalo leggermente
+        current_gas_price = web3.eth.gas_price
+        adjusted_gas_price = int(current_gas_price * 1.1)  # Aumenta del 10%
+        print(f"Utilizzando gas price: {web3.from_wei(adjusted_gas_price, 'gwei')} gwei")
+
+        # Transazione per aggiornare i metadati
+        txn = contract.functions.updateMetadata(token_id, new_uri).build_transaction({
+            'from': account.address,
+            'nonce': nonce,
+            'gas': 300000,  # Limite di gas regolabile
+            'gasPrice': adjusted_gas_price
+        })
+
+        # Firma e invio della transazione
+        signed_txn = web3.eth.account.sign_transaction(txn, private_key)
+        tx_hash = web3.eth.send_raw_transaction(signed_txn.raw_transaction)
+
+        print(f"Transazione inviata per aggiornare i metadati: {web3.to_hex(tx_hash)}")
+        receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
+        print(f"Metadati aggiornati: {receipt}")
+        return receipt
+    except Exception as e:
+        print(f"Errore durante l'aggiornamento dei metadati: {e}")
+        return None
