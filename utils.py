@@ -206,6 +206,12 @@ def create_and_transfer_nft(seed_company, product_uri, avatar_uri, taxon, seed_r
         receipt = trigger_ethereum_nft(avatar_uri, account_address)
         print(f"Dati receipt: {receipt}")
         print("NFT dinamico creato su Ethereum.")
+        
+        # Recupera il token_id dai log
+        logs = contract.events.NFTCreated().process_receipt(receipt)
+        for log in logs:
+            token_id = log['args']['tokenId']
+            print(f"Token ID: {token_id}")
     
         return wallet_receiver, NFT_token_id
     except Exception as e:
