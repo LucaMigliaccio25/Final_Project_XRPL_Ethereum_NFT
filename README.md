@@ -6,28 +6,24 @@ L'idea alla base di questa progetto nasce dal voler associare all'NFT un Digital
 ## Struttura del progetto
 Il progetto è organizzato come segue:
 
-FINAL_PROJECT_XRPL_ETHEREUM_NFT/
-├── data/                                   # Cartella contenente dati statici
-│   ├── images/                             # Immagini associate agli NFT
-│   │   ├── stregone.png                    # Immagine iniziale per l'NFT
-│   │   └── stregone_update.png             # Immagine aggiornata per l'NFT
-│   ├── metadata/                           # Metadati JSON associati agli NFT
-│   │   ├── metadata_stregone.json          # Metadati per la creazione dell'NFT
-│   │   └── metadata_stregone_update.json   # Metadati aggiornati
-├── env/                                    # Directory dell'ambiente virtuale Python
-├── .gitignore                              # File per escludere file/directory dal commit
-├── app.py                                  # Frontend basato su Streamlit per creare e aggiornare NFT
-├── dynamic_nft_abi.json                    # File JSON contenente l'ABI del contratto Ethereum
-├── Dynamic_NFT.sol                         # Contratto smart Ethereum per la gestione di NFT dinamici
-├── email_utils.py                          # Modulo per inviare email tramite Mailjet
-├── mailjet_key.env                         # File di configurazione delle chiavi Mailjet (non committato)
-├── main.py                                 # Script principale per la gestione di XRPL e Ethereum
-├── private_data.env                        # File di configurazione per le credenziali Ethereum (non committato)
-├── README.md                               # Documentazione del progetto
-├── requirements.txt                        # Elenco delle dipendenze del progetto
-├── server.py                               # Server basato su FastAPI per gestire le richieste API
-├── test_func.py                            # Script per testare le funzionalità XRPL
-└── utils.py                                # Modulo con funzioni di supporto per XRPL e Ethereum
+- data/: cartella contenente dati statici per immagini e metadati.
+    - images/: immagini associate agli NFT.
+    - metadata/: metadati JSON associati agli NFT.
+- env/: directory dell'ambiente virtuale Python.
+- img/: cartella contenente le immagini del README.
+- .gitignore: file per escludere file o directory specifici dal commit (es. env/, file .env).
+- app.py: frontend basato su Streamlit per creare e aggiornare NFT.
+- dynamic_nft_abi.json: file JSON contenente l'ABI (Application Binary Interface) del contratto Ethereum.
+- Dynamic_NFT.sol: contratto smart Ethereum per la gestione di NFT dinamici.
+- email_utils.py: modulo per inviare email tramite l'API di Mailjet.
+- mailjet_key.env: file di configurazione contenente le chiavi API di Mailjet (escluso dal commit).
+- main.py: script principale per la gestione di NFT su XRPL ed Ethereum.
+- private_data.env: file di configurazione contenente le credenziali Ethereum (es. chiavi private, escluso dal commit).
+- README.md: documentazione principale del progetto, incluse istruzioni per l'installazione e l'uso.
+- requirements.txt: elenco delle dipendenze Python necessarie al progetto.
+- server.py: server basato su FastAPI per gestire le richieste API.
+- test_func.py: script per testare funzionalità XRPL come creazione di wallet, NFT, e offerte.
+- utils.py: modulo con funzioni di supporto per l'interazione con XRPL ed Ethereum (ad esempio, funzioni per creare e aggiornare NFT).
 
 Di seguito riportiamo i passaggi che sono stati seguiti durante lo sviluppo del progetto e i dettagli ad essi associati.
 
@@ -123,6 +119,12 @@ L'interfaccia consente agli utenti di:
 - aggiornare i metadati associati all'NFT esistente.
 
 N.B. Ogni azione è legata a un tasto specifico.
+
+Per il test dell'interfaccia, è necessario utilizzare il seguente comando:
+
+```
+streamlit run app.py 
+```
 
 ![FRONTEND](img/FRONTEND_STREAMLIT.png)
 
