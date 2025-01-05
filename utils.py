@@ -230,6 +230,6 @@ def create_and_transfer_nft(seed_company, product_uri, avatar_uri, taxon, seed_r
         # Verifica l'NFT appena creato
         token_uri = verify_nft(token_id)
     
-        return wallet_receiver, NFT_token_id
+        return wallet_receiver, NFT_token_id, token_id, token_uri
     except Exception as e:
         raise Exception(f'Didn\'t work: {e}')
