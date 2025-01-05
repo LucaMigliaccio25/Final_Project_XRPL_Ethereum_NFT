@@ -11,4 +11,7 @@ contract DynamicNFT is ERC721URIStorage, Ownable {
     
     // contatore per assegnare ID unici agli NFT
     uint256 private tokenCounter;
+
+    // evento per tracciare la creazione di un NFT
+    event NFTCreated(uint256 indexed tokenId, string tokenURI);
 }
