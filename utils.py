@@ -114,6 +114,37 @@ with open("dynamic_nft_abi.json", "r") as abi_file:
 contract = web3.eth.contract(address=contract_address, abi=contract_abi)
 private_key = os.getenv("PRIVATE_KEY_METAMASK")
 
+# definizione funzione per la creazione di NFT dinamico su Ethereum
+def trigger_ethereum_nft(uri, owner_address):
+    """
+    Trigger the Ethereum smart contract to create a dynamic NFT.
+    """
+    account = web3.eth.account.from_key(private_key)
+    nonce = web3.eth.get_transaction_count(account.address)
+    
+    # Ottiene il gas price dinamico ed applica un incremento minimo
+    current_gas_price = web3.eth.gas_price
+    adjusted_gas_price = current_gas_price + web3.to_wei('2', 'gwei')  # Aggiunta di 2 gwei come incremento
+
+    # Stampa di debug
+    print(f"Utilizzando gas price: {web3.from_wei(adjusted_gas_price, 'gwei')} gwei")
+
+    # Creazione dell'NFT su Ethereum
+    txn = contract.functions.createNFT(owner_address, uri).build_transaction({
+        'from': account.address,
+        'nonce': nonce,
+        'gas': 300000,  # Limite di gas
+        'gasPrice': adjusted_gas_price  # Gas price regolato
+    })
+
+    signed_txn = web3.eth.account.sign_transaction(txn, private_key)
+    tx_hash = web3.eth.send_raw_transaction(signed_txn.raw_transaction)
+
+    print(f"Transazione inviata su Ethereum: {web3.to_hex(tx_hash)}")
+    receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
+    print(f"Transazione confermata: {receipt}")
+    return receipt
+
 def create_and_transfer_nft(seed_company, product_uri, taxon, seed_receiver = None, chain_url = "https://s.altnet.rippletest.net:51234"):
     try:
         client=JsonRpcClient(chain_url)
