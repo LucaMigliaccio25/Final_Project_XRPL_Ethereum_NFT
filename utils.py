@@ -1,3 +1,4 @@
+# CODICE PROGETTO XRPL
 from xrpl.account import get_balance, get_next_valid_seq_number
 from xrpl.clients import JsonRpcClient
 from xrpl.wallet import Wallet, generate_faucet_wallet
@@ -89,6 +90,9 @@ def accept_sell_offer(seed, offer_index):
 
 MIN_AMOUNT = "2000"
 MIN_FEE = "20"
+
+#----------------------------------------------------------------------------------------------------
+# CODICE PROGETTO ETHEREUM-XRPL
 
 def create_and_transfer_nft(seed_company, product_uri, taxon, seed_receiver = None, chain_url = "https://s.altnet.rippletest.net:51234"):
     try:
