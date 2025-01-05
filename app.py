@@ -1,4 +1,6 @@
 import streamlit as st
+import json
+from utils import create_and_transfer_nft
 
 # Dati XRPL
 seed_company = "sEd7uhRLEHf7sELoTUiKTcDwgn3zvdA"
@@ -23,3 +25,26 @@ st.title("Creazione di un NFT Dinamico su Ethereum")
 # Layout: Colonne per azioni
 st.subheader("Azioni disponibili")
 col1, col2 = st.columns(2)
+
+# Sezione: Creazione NFT
+with col1:
+    st.header("Crea NFT - Avatar")
+    if st.button("Crea NFT"):
+        try:
+            st.write("Creazione dell'NFT in corso...")
+            # Creazione NFT
+            contract_address, NFT_token_id, token_id, token_uri = create_and_transfer_nft(
+                seed_company, product_uri, initial_metadata, taxon, seed_receiver=seed_receiver
+            )
+            
+            # Salva i dati del token in un file JSON
+            data = {"token_id": token_id, "token_uri": token_uri}
+            with open("token_data.json", "w") as f:
+                json.dump(data, f)
+
+            # Mostra dettagli NFT
+            st.success("NFT creato con successo!")
+            st.json(data)
+            st.image(initial_image_path, caption="Immagine Avatar Creato", use_container_width=True)
+        except Exception as e:
+            st.error(f"Errore durante la creazione dell'NFT: {e}")
