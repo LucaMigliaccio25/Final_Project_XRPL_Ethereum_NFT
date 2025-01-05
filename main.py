@@ -1,4 +1,4 @@
-from utils import create_and_transfer_nft
+from utils import create_and_transfer_nft, update_nft_metadata
 
 # dati per XRPL
 seed_company = "sEd7uhRLEHf7sELoTUiKTcDwgn3zvdA"
@@ -18,6 +18,12 @@ if __name__ == '__main__':
         print(f"Creazione completata:\nXRPL: {NFT_token_id}\nEthereum: NFT dinamico creato.")
         print(f"TOKEN ID: {token_id}\n")
         print(f"TOKEN URI: {token_uri}\n")
+        
+        # Aggiornamento dei metadati dell'NFT
+        # token_id = 0 # Token ID dell'NFT dinamico (possibile specificarlo)
+        new_metadata_uri = "https://drive.google.com/file/d/1fO30hSD1ZExxBIa4tY2QDbdGD1zhoJ3t/view?usp=drive_link"
+        update_receipt = update_nft_metadata(token_id, new_metadata_uri)
+        print(f"Metadati aggiornati per il token {token_id}: {update_receipt}")
     
     except Exception as e:
-        print(f"Errore durante la creazione: {e}")
+        print(f"Errore durante la creazione o l'aggiornamento: {e}")
