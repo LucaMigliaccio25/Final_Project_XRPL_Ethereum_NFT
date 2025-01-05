@@ -9,6 +9,7 @@ from xrpl.models.transactions import NFTokenMint, NFTokenCreateOffer, NFTokenAcc
 from xrpl.utils import str_to_hex, datetime_to_ripple_time
 from xrpl.ledger import get_latest_validated_ledger_sequence
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
 client = JsonRpcClient("https://s.altnet.rippletest.net:51234")
 
@@ -93,6 +94,8 @@ MIN_FEE = "20"
 
 #----------------------------------------------------------------------------------------------------
 # CODICE PROGETTO ETHEREUM-XRPL
+
+load_dotenv(dotenv_path="private_data.env")
 
 def create_and_transfer_nft(seed_company, product_uri, taxon, seed_receiver = None, chain_url = "https://s.altnet.rippletest.net:51234"):
     try:
