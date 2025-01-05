@@ -12,7 +12,7 @@ taxon = 0
 initial_image_path = "data/images/stregone.png"  # Immagine per la creazione
 updated_image_path = "data/images/stregone_update.png"  # Immagine per l'aggiornamento
 
-# Metadati
+# Percorsi Metadati associati alle immagini
 initial_metadata = "data/metadata/metadata_stregone.json"
 updated_metadata = "data/metadata/metadata_stregone_update.json"
 
