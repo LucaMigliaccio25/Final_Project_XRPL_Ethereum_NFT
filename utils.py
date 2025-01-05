@@ -94,8 +94,25 @@ MIN_FEE = "20"
 
 #----------------------------------------------------------------------------------------------------
 # CODICE PROGETTO ETHEREUM-XRPL
+from web3 import Web3
+import os
+from dotenv import load_dotenv
+import json
 
+# Caricamento delle variabili d'ambiente
 load_dotenv(dotenv_path="private_data.env")
+
+# Configurazione di QuickNode (Ethereum)
+quicknode_url = os.getenv("QUICKNODE_URL")
+web3 = Web3(Web3.HTTPProvider(quicknode_url))
+if not web3.is_connected():
+    raise Exception("--- Connessione a QuickNode fallita! ---")
+
+contract_address = os.getenv("CONTRACT_ADDRESS")
+with open("dynamic_nft_abi.json", "r") as abi_file:
+    contract_abi = json.load(abi_file)
+contract = web3.eth.contract(address=contract_address, abi=contract_abi)
+private_key = os.getenv("PRIVATE_KEY_METAMASK")
 
 def create_and_transfer_nft(seed_company, product_uri, taxon, seed_receiver = None, chain_url = "https://s.altnet.rippletest.net:51234"):
     try:
