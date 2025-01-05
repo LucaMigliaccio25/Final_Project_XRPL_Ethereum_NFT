@@ -10,7 +10,14 @@ taxon = 0
 avatar_uri = "https://drive.google.com/file/d/1hjWW9yfOnPk1rlcLcjg4ycADWvacXrQy/view?usp=drive_link"
 
 if __name__ == '__main__':
-    wallet_receiver, NFT_token_id = create_and_transfer_nft(seed_company, product_uri, taxon, seed_receiver=seed_receiver)
-    print("Everything ok")
-    print(f"{wallet_receiver, NFT_token_id = }")
+    try:
+        # Creazione NFT su XRPL e Ethereum
+        wallet_receiver, NFT_token_id, token_id, token_uri = create_and_transfer_nft(seed_company, product_uri, avatar_uri, taxon, seed_receiver=seed_receiver)
+        # print("Everything ok")
+        # print(f"{wallet_receiver, NFT_token_id = }")
+        print(f"Creazione completata:\nXRPL: {NFT_token_id}\nEthereum: NFT dinamico creato.")
+        print(f"TOKEN ID: {token_id}\n")
+        print(f"TOKEN URI: {token_uri}\n")
     
+    except Exception as e:
+        print(f"Errore durante la creazione: {e}")
