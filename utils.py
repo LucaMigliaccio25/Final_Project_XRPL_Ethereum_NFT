@@ -145,7 +145,7 @@ def trigger_ethereum_nft(uri, owner_address):
     print(f"Transazione confermata: {receipt}")
     return receipt
 
-def create_and_transfer_nft(seed_company, product_uri, taxon, seed_receiver = None, chain_url = "https://s.altnet.rippletest.net:51234"):
+def create_and_transfer_nft(seed_company, product_uri, avatar_uri, taxon, seed_receiver = None, chain_url = "https://s.altnet.rippletest.net:51234"):
     try:
         client=JsonRpcClient(chain_url)
 
@@ -199,6 +199,13 @@ def create_and_transfer_nft(seed_company, product_uri, taxon, seed_receiver = No
 
         if not response_accept_sell_offer['meta']['TransactionResult'] == 'tesSUCCESS':
             raise Exception(f'Didn\'t work: {e}')
+        
+        # Trigger del contratto Ethereum
+        print("Attivazione del contratto Ethereum...")
+        account_address = "0x0CbB29c4659DB51384fA809e0a7b7147c315DC4c" # indirizzo Metamask
+        receipt = trigger_ethereum_nft(avatar_uri, account_address)
+        print(f"Dati receipt: {receipt}")
+        print("NFT dinamico creato su Ethereum.")
     
         return wallet_receiver, NFT_token_id
     except Exception as e:
