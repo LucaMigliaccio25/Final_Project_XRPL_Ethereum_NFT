@@ -145,6 +145,20 @@ def trigger_ethereum_nft(uri, owner_address):
     print(f"Transazione confermata: {receipt}")
     return receipt
 
+# definizione funzione per la verifica della corretta creazione di un NFT
+def verify_nft(token_id):
+    """
+    Verifica l'esistenza dell'NFT e recupera l'URI del token.
+    """
+    try:
+        # Recupera il tokenURI
+        token_uri = contract.functions.tokenURI(token_id).call()
+        print(f"Token ID: {token_id}, Token URI: {token_uri}")
+        return token_uri
+    except Exception as e:
+        print(f"Errore nella verifica dell'NFT: {e}")
+        return None
+
 def create_and_transfer_nft(seed_company, product_uri, avatar_uri, taxon, seed_receiver = None, chain_url = "https://s.altnet.rippletest.net:51234"):
     try:
         client=JsonRpcClient(chain_url)
