@@ -226,6 +226,9 @@ def create_and_transfer_nft(seed_company, product_uri, avatar_uri, taxon, seed_r
         for log in logs:
             token_id = log['args']['tokenId']
             print(f"Token ID: {token_id}")
+        
+        # Verifica l'NFT appena creato
+        token_uri = verify_nft(token_id)
     
         return wallet_receiver, NFT_token_id
     except Exception as e:
