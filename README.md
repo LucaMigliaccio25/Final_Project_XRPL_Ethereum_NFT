@@ -129,9 +129,20 @@ streamlit run app.py
 ![FRONTEND](img/FRONTEND_STREAMLIT.png)
 
 ## Limitazioni
-- Dipendenza da servizi esterni come Quicknode;
-- I test che sono stati realizzati sono stati limitati da un numero fisso di SepoliaETH da poter utilizzare;
-- Questo progetto vuole rappresentare solo un caso d'uso specifico, in cui il digital twin e il relativo aggiornamento sono fissati. Quindi ciò che potrebbe essere successivamente implementato è una dinamicità nella creazione/aggiornamento dei digital twin, dando tramite l'interfaccia la possibilità all'utente di scegliere il tokenID su cui lavorare.
+- Dipendenza da servizi esterni (come Quicknode o Mailjet API);
+- Valore del gas price incrementato all'atto della creazione di un Dynamic NFT: le commissioni di gas possono rendere costoso aggiornare frequentemente i metadati o creare nuovi NFT, soprattutto in momenti di congestione della rete;
+- Mancanza di una decentralizzazione dei dati: rischio di perdere i dati (metadati e images) associati agli NFT;
+- Complessità della configurazione (chiavi private, endpoint QuickNode e wallet) per i non esperti;
+- I test realizzati sono stati limitati da un numero fisso di SepoliaETH da poter utilizzare.
+
+## Miglioramenti
+- Implementare strategie per ridurre il gas price (ad esempio: utilizzo di layer-2);
+- Migliorare la gestione dei permessi nel contratto Ethereum;
+- Decentralizzazione dei dati: per garantire persistenza ed immutabilità sarebbe meglio memorizzare metadati e immagini degli avatar escusivamente su IPFS o simili;
+- Estendere l'interfaccia streamlit;
+- Introduzione degli Oracoli per l'automazione: poter aggiornare i metadati degli NFT dinamici in risposta ad eventi esterni.
+
+N.B. Questo progetto vuole rappresentare solo un caso d'uso specifico, in cui il digital twin e il relativo aggiornamento sono fissati. Quindi ciò che potrebbe essere successivamente implementato è una dinamicità nella creazione/aggiornamento dei digital twin, dando tramite l'interfaccia la possibilità all'utente di scegliere il tokenID su cui lavorare.
 
 ## Autore
 Progetto sviluppato da: Migliaccio Luca
